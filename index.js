@@ -4,6 +4,24 @@ let level = 0;
 
 const startButton = document.querySelector(".js-start");
 const info = document.querySelector(".js-info");
+const heading = document.querySelector(".js-heading");
+const tileContainer = document.querySelector(".js-container");
+
+function resetGame(text) {
+  alert(text);
+  sequence = [];
+  humanSequence = [];
+  level = 0;
+  startButton.classList.remove("hidden");
+  heading.textContent = "Simon Game";
+  info.classList.add("hidden");
+  tileContainer.classList.add("unclickable");
+}
+
+function humanTurn(level) {
+  tileContainer.classList.remove("unclickable");
+  info.textContent = `Your turn: ${level} tap${level > 1 ? "s" : ""}`;
+}
 
 function activateTile(color) {
   const tile = document.querySelector(`[data-tile="${color}"]`);
@@ -33,9 +51,45 @@ function nextStep() {
 
 function nextRound() {
   level += 1;
+
+  tileContainer.classList.add("unclickable");
+  info.textContent = "Wait for the computer";
+  heading.textContent = `Level ${level} of 20`;
+
   const nextSequence = [...sequence];
   nextSequence.push(nextStep());
   playRound(nextSequence);
+
+  sequence = [...nextSequence];
+  setTimeout(() => {
+    humanTurn(level);
+  }, level * 600 + 1000);
+}
+
+function handleClick(tile) {
+  const index = humanSequence.push(tile) - 1;
+  const sound = document.querySelector(`[data-sound='${tile}']`);
+  sound.play();
+
+  const remainingTaps = sequence.length - humanSequence.length;
+
+  if (humanSequence[index] !== sequence[index]) {
+    resetGame("Oops! Game over, you pressed the wrong tile");
+    return;
+  }
+
+  if (humanSequence.length === sequence.length) {
+    humanSequence = [];
+    info.textContent = "Success! Keep going!";
+    setTimeout(() => {
+      nextRound();
+    }, 1000);
+    return;
+  }
+
+  info.textContent = `Your turn: ${remainingTaps} Tap${
+    remainingTaps > 1 ? "s" : ""
+  }`;
 }
 
 function startGame() {
@@ -46,3 +100,9 @@ function startGame() {
 }
 
 startButton.addEventListener("click", startGame);
+
+tileContainer.addEventListener("click", (evt) => {
+  const { tile } = evt.target.dataset;
+
+  if (tile) handleClick(tile);
+});
