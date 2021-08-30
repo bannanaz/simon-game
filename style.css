@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  background-color: #fbfaf7;
+  background-color: #f7f6f2;
 }
 
 *,
@@ -15,6 +15,7 @@ body {
   display: flex;
   justify-content: center;
   font-family: "Roboto", sans-serif;
+  color: rgb(63, 62, 62);
 }
 
 .game {
@@ -34,7 +35,6 @@ body {
 
 header {
   text-align: center;
-  font-size: 18px;
 }
 
 .heading {
@@ -47,8 +47,8 @@ header {
   grid-template-columns: 180px 180px 180px 180px;
   grid-gap: 30px;
   position: relative;
-  margin-top: 35px;
-  margin-bottom: 40px;
+  margin-top: 55px;
+  margin-bottom: 55px;
 }
 
 .unclickable {
@@ -169,37 +169,37 @@ header {
 
 .info-section p {
   font-size: 14px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .start-button {
   display: inline-block;
   height: 45px;
-  margin-top: 10px;
   padding: 0 30px;
-  color: #555;
+  color: #f7f6f2;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  line-height: 38px;
+  font-style: italic;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
   text-decoration: none;
   white-space: nowrap;
-  background-color: white;
-  border-radius: 4px;
-  border: 1px solid #bbb;
+  background-color: #3f3e3e;
+  border-radius: 15px;
+  border: 1px solid #6d6363;
   cursor: pointer;
 }
 
 .start-button:hover {
-  color: #333;
-  border-color: #888;
+  background-color: #636161;
+  border-color: #6d6363;
   outline: 0;
 }
 
 .info {
   font-size: 22px;
+  margin-top: 25px;
 }
 
 footer {
